@@ -7,6 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN python manage.py collectstatic --noinput
-
-CMD gunicorn libros.wsgi:application --bind 0.0.0.0:$PORT
+CMD python manage.py collectstatic --noinput && gunicorn libros.wsgi:application --bind 0.0.0.0:$PORT
