@@ -48,3 +48,22 @@ class CrearLibroView(CreateView):
     form_class = LibroForm
     template_name = 'gestion/libro_form.html'
     success_url = reverse_lazy('lista_libros')
+
+
+def actualizar_libro(request, pk):
+    libro = get_object_or_404(Libro, pk=pk)
+    if request.method == 'POST':
+        form = LibroForm(request.POST, instance=libro)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_libros')
+    else:
+        form = LibroForm(instance=libro)
+    return render(request, 'gestion/actualizar_libro.html', {'form': form, 'libro': libro})
+
+
+class ActualizarLibroView(UpdateView):
+    model = Libro
+    form_class = LibroForm
+    template_name = 'gestion/actualizar_libro_generic.html'
+    success_url = reverse_lazy('lista_libros')
