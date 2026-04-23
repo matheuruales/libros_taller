@@ -1,4 +1,5 @@
-from django.views.generic import ListView, CreateView
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from .models import Autor, Libro
 from .forms import AutorForm, LibroForm
@@ -14,6 +15,25 @@ class CrearAutorView(CreateView):
     model = Autor
     form_class = AutorForm
     template_name = 'gestion/autor_form.html'
+    success_url = reverse_lazy('lista_autores')
+
+
+def actualizar_autor(request, pk):
+    autor = get_object_or_404(Autor, pk=pk)
+    if request.method == 'POST':
+        form = AutorForm(request.POST, instance=autor)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_autores')
+    else:
+        form = AutorForm(instance=autor)
+    return render(request, 'gestion/actualizar_autor.html', {'form': form, 'autor': autor})
+
+
+class ActualizarAutorView(UpdateView):
+    model = Autor
+    form_class = AutorForm
+    template_name = 'gestion/actualizar_autor_generic.html'
     success_url = reverse_lazy('lista_autores')
 
 
