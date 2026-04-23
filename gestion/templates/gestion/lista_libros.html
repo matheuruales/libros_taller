@@ -35,7 +35,7 @@
                 <td class="px-4 py-3 text-gray-600">{{ libro.autor }}</td>
                 <td class="px-4 py-3 text-gray-500 font-mono text-xs">{{ libro.isbn }}</td>
                 <td class="px-4 py-3 flex gap-2">
-                    <a href="#"
+                    <a href="{% url 'actualizar_libro' libro.pk %}"
                        class="inline-flex items-center px-3 py-1 rounded-md border border-gray-200 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors">
                         Editar
                     </a>

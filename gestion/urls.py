@@ -6,4 +6,6 @@ urlpatterns = [
     path('autores/crear/', views.CrearAutorView.as_view(), name='crear_autor'),
     path('libros/', views.ListaLibrosView.as_view(), name='lista_libros'),
     path('libros/crear/', views.CrearLibroView.as_view(), name='crear_libro'),
+    path('libros/<int:pk>/actualizar/', views.actualizar_libro, name='actualizar_libro'),
+    path('libros/<int:pk>/actualizar-generic/', views.ActualizarLibroView.as_view(), name='actualizar_libro_generic'),
 ]
