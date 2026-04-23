@@ -1,5 +1,5 @@
 [build]
-builder = "nixpacks"
+builder = "dockerfile"
 
 [deploy]
 startCommand = "gunicorn libros.wsgi:application --bind 0.0.0.0:$PORT"
