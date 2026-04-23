@@ -11,6 +11,21 @@ if env_file.exists():
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-fallback-key-for-build-only')
 DEBUG = env('DEBUG')
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+CSRF_TRUSTED_ORIGINS = env.list(
+    'CSRF_TRUSTED_ORIGINS',
+    default=[
+        'https://*.up.railway.app',
+        'https://*.railway.app',
+        'http://localhost',
+        'http://127.0.0.1',
+    ],
+)
+
+if not DEBUG:
+    # Railway terminates TLS at the edge and forwards scheme via this header.
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
