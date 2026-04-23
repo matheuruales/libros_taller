@@ -37,6 +37,20 @@ class ActualizarAutorView(UpdateView):
     success_url = reverse_lazy('lista_autores')
 
 
+def eliminar_autor(request, pk):
+    autor = get_object_or_404(Autor, pk=pk)
+    if request.method == 'POST':
+        autor.delete()
+        return redirect('lista_autores')
+    return render(request, 'gestion/eliminar_autor.html', {'autor': autor})
+
+
+class EliminarAutorView(DeleteView):
+    model = Autor
+    template_name = 'gestion/eliminar_autor_generic.html'
+    success_url = reverse_lazy('lista_autores')
+
+
 class ListaLibrosView(ListView):
     model = Libro
     template_name = 'gestion/lista_libros.html'
