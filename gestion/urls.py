@@ -12,4 +12,6 @@ urlpatterns = [
     path('libros/crear/', views.CrearLibroView.as_view(), name='crear_libro'),
     path('libros/<int:pk>/actualizar/', views.actualizar_libro, name='actualizar_libro'),
     path('libros/<int:pk>/actualizar-generic/', views.ActualizarLibroView.as_view(), name='actualizar_libro_generic'),
+    path('libros/<int:pk>/eliminar/', views.eliminar_libro, name='eliminar_libro'),
+    path('libros/<int:pk>/eliminar-generic/', views.EliminarLibroView.as_view(), name='eliminar_libro_generic'),
 ]

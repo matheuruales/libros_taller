@@ -81,3 +81,17 @@ class ActualizarLibroView(UpdateView):
     form_class = LibroForm
     template_name = 'gestion/actualizar_libro_generic.html'
     success_url = reverse_lazy('lista_libros')
+
+
+def eliminar_libro(request, pk):
+    libro = get_object_or_404(Libro, pk=pk)
+    if request.method == 'POST':
+        libro.delete()
+        return redirect('lista_libros')
+    return render(request, 'gestion/eliminar_libro.html', {'libro': libro})
+
+
+class EliminarLibroView(DeleteView):
+    model = Libro
+    template_name = 'gestion/eliminar_libro_generic.html'
+    success_url = reverse_lazy('lista_libros')
