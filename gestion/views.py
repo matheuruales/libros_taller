@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Autor, Libro
 from .forms import AutorForm, LibroForm
@@ -34,6 +34,20 @@ class ActualizarAutorView(UpdateView):
     model = Autor
     form_class = AutorForm
     template_name = 'gestion/actualizar_autor_generic.html'
+    success_url = reverse_lazy('lista_autores')
+
+
+def eliminar_autor(request, pk):
+    autor = get_object_or_404(Autor, pk=pk)
+    if request.method == 'POST':
+        autor.delete()
+        return redirect('lista_autores')
+    return render(request, 'gestion/eliminar_autor.html', {'autor': autor})
+
+
+class EliminarAutorView(DeleteView):
+    model = Autor
+    template_name = 'gestion/eliminar_autor_generic.html'
     success_url = reverse_lazy('lista_autores')
 
 
