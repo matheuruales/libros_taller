@@ -1,0 +1,43 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Agregar Autor — Gestión de Libros{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto">
+    <div class="mb-6">
+        <h1 class="text-2xl font-semibold tracking-tight">Agregar Autor</h1>
+        <p class="text-sm text-gray-500 mt-1">Completa los campos para registrar un nuevo autor.</p>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="space-y-1.5">
+                <label for="{{ field.id_for_label }}"
+                       class="text-sm font-medium text-gray-700">
+                    {{ field.label }}
+                </label>
+                <div class="[&>input]:w-full [&>input]:border [&>input]:border-gray-200 [&>input]:rounded-md [&>input]:px-3 [&>input]:py-2 [&>input]:text-sm [&>input]:outline-none [&>input]:focus:ring-2 [&>input]:focus:ring-gray-900 [&>input]:focus:border-transparent [&>textarea]:w-full [&>textarea]:border [&>textarea]:border-gray-200 [&>textarea]:rounded-md [&>textarea]:px-3 [&>textarea]:py-2 [&>textarea]:text-sm [&>textarea]:outline-none [&>textarea]:focus:ring-2 [&>textarea]:focus:ring-gray-900 [&>textarea]:focus:border-transparent [&>select]:w-full [&>select]:border [&>select]:border-gray-200 [&>select]:rounded-md [&>select]:px-3 [&>select]:py-2 [&>select]:text-sm [&>select]:outline-none [&>select]:focus:ring-2 [&>select]:focus:ring-gray-900 [&>select]:focus:border-transparent">
+                    {{ field }}
+                </div>
+                {% if field.errors %}
+                <p class="text-xs text-red-500">{{ field.errors|join:", " }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <div class="flex gap-3 pt-2">
+                <button type="submit"
+                        class="flex-1 bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">
+                    Guardar
+                </button>
+                <a href="{% url 'lista_autores' %}"
+                   class="flex-1 text-center border border-gray-200 text-sm font-medium px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
