@@ -27,3 +27,15 @@ staticfiles/
 
 # OS
 .DS_Store
+
+# Environment variables
+.env
+
+# Local tooling / CLI artifacts
+.claude/
+node_modules/
+supabase/.temp/
+
+# Local Node scratch files (not used by this Django app)
+package.json
+package-lock.json
