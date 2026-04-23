@@ -1,0 +1,9 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "gunicorn libros.wsgi:application --bind 0.0.0.0:$PORT"
+releaseCommand = "python manage.py migrate --noinput"
+healthcheckPath = "/"
+healthcheckTimeout = 60
+restartPolicyType = "on_failure"
