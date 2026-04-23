@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestión de Libros{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        border: 'hsl(214.3 31.8% 91.4%)',
+                        input: 'hsl(214.3 31.8% 91.4%)',
+                        ring: 'hsl(222.2 84% 4.9%)',
+                        background: 'hsl(0 0% 100%)',
+                        foreground: 'hsl(222.2 84% 4.9%)',
+                        muted: 'hsl(210 40% 96.1%)',
+                        'muted-foreground': 'hsl(215.4 16.3% 46.9%)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen text-gray-900 antialiased">
+
+    <header class="border-b border-gray-200 bg-white">
+        <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+            <span class="font-semibold text-sm tracking-tight">Gestión de Libros</span>
+            <nav class="flex items-center gap-1">
+                <a href="{% url 'lista_autores' %}"
+                   class="text-sm px-3 py-1.5 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+                    Autores
+                </a>
+                <a href="{% url 'lista_libros' %}"
+                   class="text-sm px-3 py-1.5 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+                    Libros
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

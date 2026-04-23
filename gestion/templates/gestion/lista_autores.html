@@ -1,0 +1,56 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Autores — Gestión de Libros{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="text-2xl font-semibold tracking-tight">Autores</h1>
+        <p class="text-sm text-gray-500 mt-1">Lista de autores registrados en el sistema.</p>
+    </div>
+    <a href="{% url 'crear_autor' %}"
+       class="inline-flex items-center gap-2 bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">
+        + Agregar Autor
+    </a>
+</div>
+
+<div class="rounded-lg border border-gray-200 bg-white overflow-hidden shadow-sm">
+    <table class="w-full text-sm">
+        <thead>
+            <tr class="border-b border-gray-200 bg-gray-50">
+                <th class="text-left px-4 py-3 font-medium text-gray-600">Nombre</th>
+                <th class="text-left px-4 py-3 font-medium text-gray-600">Correo</th>
+                <th class="text-left px-4 py-3 font-medium text-gray-600">Nacionalidad</th>
+                <th class="text-left px-4 py-3 font-medium text-gray-600">Nacimiento</th>
+                <th class="text-left px-4 py-3 font-medium text-gray-600">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for autor in autores %}
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-4 py-3 font-medium">{{ autor.nombre }}</td>
+                <td class="px-4 py-3 text-gray-600">{{ autor.correo }}</td>
+                <td class="px-4 py-3 text-gray-600">{{ autor.nacionalidad }}</td>
+                <td class="px-4 py-3 text-gray-600">{{ autor.fecha_nacimiento }}</td>
+                <td class="px-4 py-3 flex gap-2">
+                    <a href="{% url 'actualizar_autor' autor.pk %}"
+                       class="inline-flex items-center px-3 py-1 rounded-md border border-gray-200 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                        Editar
+                    </a>
+                    <a href="{% url 'eliminar_autor' autor.pk %}"
+                       class="inline-flex items-center px-3 py-1 rounded-md border border-red-200 text-xs font-medium text-red-600 hover:bg-red-50 transition-colors">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="px-4 py-10 text-center text-gray-400 text-sm">
+                    No hay autores registrados.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+.git
+.env
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.venv
+venv
+node_modules
+staticfiles
+db.sqlite3
+.DS_Store
+supabase
+package.json
+package-lock.json
